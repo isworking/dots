@@ -64,3 +64,4 @@ ttf-dejavu
 ttf-cascadia-code
 ttf-jetbrains-mono-nerd
 noto-fonts-extra
+devtools
