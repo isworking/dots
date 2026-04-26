@@ -1,0 +1,7 @@
+[advice]
+	defaultBranchName = false
+[user]
+	name = Rajdeep Malakar
+	email = rajdeepm.dev@gmail.com
+[commit]
+	gpgsign = true

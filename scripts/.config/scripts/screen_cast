@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+DIR="$HOME/Videos"
+FILE="$DIR/recording-$(date +'%Y-%m-%d_%H-%M-%S').mp4"
+PIDFILE="/tmp/wf-recorder.pid"
+
+if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+    # Stop recording
+    kill -INT "$(cat "$PIDFILE")"
+    rm -f "$PIDFILE"
+
+    notify-send "Recording stopped" "$FILE"
+else
+    wf-recorder -f "$FILE" "$(slurp)" &
+    echo $! >"$PIDFILE"
+
+fi

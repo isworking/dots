@@ -1,0 +1,8 @@
+# backups
+*.bak
+
+# temp
+*.swp
+
+# OS junk
+.DS_Store

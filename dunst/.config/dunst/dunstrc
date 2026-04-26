@@ -1,0 +1,20 @@
+[global]
+frame_color = "#8caaee"
+separator_color= frame
+offset = 2x2
+origin = top-center
+dmenu = "rofi -dmenu -p dunst"
+mouse_left_click = "context_all"
+
+[urgency_low]
+background = "#303446"
+foreground = "#c6d0f5"
+
+[urgency_normal]
+background = "#303446"
+foreground = "#c6d0f5"
+
+[urgency_critical]
+background = "#303446"
+foreground = "#c6d0f5"
+frame_color = "#ef9f76"

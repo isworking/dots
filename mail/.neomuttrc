@@ -1,0 +1,108 @@
+# Define variables for easy account switching
+set my_gmail_user = "rajdeepm.dev"
+set my_gmail_name = "Rajdeep Malakar"
+set my_gmail_pass = "jcez hwxf wwep xebx"
+set my_gmail_from = "$my_gmail_user@gmail.com"
+
+# Basic settings
+set real_name = $my_gmail_name
+set from = $my_gmail_from
+set use_from = yes
+
+# IMAP settings
+set imap_user = $my_gmail_from
+set imap_pass = $my_gmail_pass
+
+set folder = "imaps://imap.gmail.com/"
+set spool_file = "+INBOX"
+set record = "+[Gmail]/Sent Mail"
+set postponed = "+[Gmail]/Drafts"
+set trash = "+[Gmail]/Trash"
+
+# SMTP settings
+set smtp_url = "smtps://$my_gmail_from@smtp.gmail.com/"
+set smtp_pass = $my_gmail_pass
+
+# Mail directories
+set header_cache = ~/.cache/neomutt/headers
+set message_cachedir = ~/.cache/neomutt/bodies
+set certificate_file = ~/.mutt/certificates
+
+# Set default editor to vim
+set editor = "vim"
+
+# General settings
+set charset = "utf-8"
+set mail_check = 120
+set timeout = 300
+set ssl_force_tls = yes
+set ssl_starttls = yes
+set ssl_use_sslv3 = no
+
+# Folder view settings
+set imap_check_subscribed = yes
+#set folder_format = "%2C %t %N %F %2l %-20.20u %20.20f %2C %12s %4M %2d %4L %3M %D"
+set index_format = "%4C %Z %{%b %d} %-15.15L (%4c) %s"
+
+# Cache passwords in memory for the duration of the session
+set imap_passive = yes
+set imap_keepalive = 900
+
+# Enable colors
+color normal default default
+color indicator brightyellow default
+color header brightblue default
+color attachment brightmagenta default
+color status brightyellow blue
+color search default brightcyan
+color tree default default
+color tilde brightmagenta default
+color signature green default
+color error brightred default
+#color status_bg brightgreen default
+
+# Enable sidebar (if you like using it)
+set sidebar_visible = yes
+set sidebar_width = 25
+#set sidebar_delim = '|'
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+
+# Enable GPG (if you use encryption)
+# set pgp_use_gpg_agent = yes
+# set pgp_sign_as = 0xYourKeyID
+# set pgp_timeout = 300
+
+# Macros (optional)
+bind index,pager g noop
+macro index,pager gi "<change-folder>imaps://imap.gmail.com/INBOX<enter>"
+macro index,pager ga "<change-folder>imaps://imap.gmail.com/[Gmail]/All Mail<enter>"
+macro index,pager gd "<change-folder>imaps://imap.gmail.com/[Gmail]/Drafts<enter>"
+macro index,pager gs "<change-folder>imaps://imap.gmail.com/[Gmail]/Sent Mail<enter>"
+macro index,pager gt "<change-folder>imaps://imap.gmail.com/[Gmail]/Trash<enter>"
+
+# Mailcap (for viewing attachments and handling HTML)
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# HTML settings
+set implicit_autoview = yes
+set mailcap_path = ~/.mutt/mailcap
+
+# Add this to ~/.mutt/mailcap for viewing HTML emails in w3m
+# text/html; w3m -dump %s; needsterminal;
+
+# GMail labels
+set imap_list_subscribed = yes
+
+# Save copies of outgoing mail
+set copy = yes
+set record = "+[Gmail]/Sent Mail"
+
+# Automatically check for new mail
+set mail_check = 60
+
+# Default to plain text for composing emails
+set compose_format = "text/plain"
+
+# Source your personal configuration file if you have one
+# source ~/.neomuttrc.local

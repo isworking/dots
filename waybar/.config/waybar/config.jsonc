@@ -1,0 +1,202 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
+  "gtk-layer-shell": true,
+
+  "modules-left": [
+    "sway/workspaces",
+    "custom/separator",
+    "sway/window"
+  ],
+
+  "modules-center": [
+    "clock#time",
+    "custom/separator",
+    "custom/distro",
+    "custom/separator",
+    "clock#date"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "custom/separator",
+    "memory",
+    "custom/separator",
+    "custom/temperature",
+    "custom/separator",
+    "pulseaudio",
+    "custom/separator",
+    "backlight",
+    "custom/separator",
+    "network",
+    "custom/separator",
+    "bluetooth",
+    "custom/separator",
+    "battery",
+    "custom/separator",
+    "custom/screenshot",
+    "custom/separator",
+    "custom/screencast",
+    "custom/separator",
+    "custom/power"
+  ],
+
+  /* ───────── WORKSPACES ───────── */
+  "sway/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "α",
+      "2": "β",
+      "3": "γ",
+      "4": "δ",
+      "5": "ε",
+      "6": "ζ",
+      "7": "η",
+      "8": "θ",
+      "9": "ι",
+      "10": "κ",
+      "default": "•"
+    },
+    "on-scroll-up": "swaymsg workspace prev",
+    "on-scroll-down": "swaymsg workspace next"
+  },
+
+  /* ───────── WINDOW ───────── */
+"sway/window": { "swap-icon-label": false, "format": "{}", "format-empty": " 🏠 Home", "max-length": 50, "icon": true, "icon-size": 12 },
+
+  /* ───────── ARCH LOGO ───────── */
+  "custom/distro": {
+    "format": "",
+    "tooltip": false
+  },
+
+  /* ───────── SEPARATOR ───────── */
+  "custom/separator": {
+    "format": "│",
+    "interval": "once",
+    "tooltip": false
+  },
+
+  /* ───────── TIME ───────── */
+  "clock#time": {
+    "format": " {:%H:%M}",
+    "tooltip": false
+  },
+
+  /* ───────── DATE + CALENDAR ───────── */
+  "clock#date": {
+    "format": " {:%b %d}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "format": {
+        "months": "<span color='#89b4fa'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b>{}</b></span>"
+      }
+    }
+  },
+
+  /* ───────── CPU ───────── */
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "tooltip": true
+  },
+
+  /* ───────── MEMORY ───────── */
+  "memory": {
+    "format": "󰘚 {percentage}%",
+    "tooltip": true
+  },
+
+  /* ───────── TEMP ───────── */
+  "custom/temperature": {
+    "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 5
+  },
+
+  /* ───────── AUDIO ───────── */
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 muted",
+    "format-icons": ["󰕿", "󰖀", "󰕾"],
+    "on-click": "~/.config/waybar/scripts/volume-control.sh",
+    "tooltip-format": "{desc}"
+  },
+
+  /* ───────── BRIGHTNESS ───────── */
+  "backlight": {
+    "format": "󰃠 {percent}%",
+    "on-scroll-up": "~/.config/waybar/scripts/brightness-control.sh -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/brightness-control.sh -o d"
+  },
+
+  /* ───────── WIFI ───────── */
+  "network": {
+    "format-wifi": "󰤨  {essid}",
+    "format-ethernet": "󰈀  ETH",
+    "format-disconnected": "󰤭  OFFLINE",
+    "tooltip-format": "{essid} ({signalStrength}%)",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click-right": "alacritty -e nmtui"
+  },
+
+  /* ───────── BLUETOOTH ───────── */
+  "bluetooth": {
+      "max-length": 8,
+      "format": " {status}",
+      "format-connected": " {device_alias}",
+      "format-disabled": "󰂲",
+      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+      // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+      "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+      "on-click-right": "alacritty -e bluetui"
+  },
+
+  /* ───────── BATTERY ───────── */
+  "battery": {
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰂎","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "format-charging": " {capacity}%",
+    "tooltip-format": "Discharging: {time}",
+    "tooltip-format-charging": "Charging: {time}",
+    "interval": 5
+  },
+
+  /* ───────── SCREENSHOT ───────── */
+  "custom/screenshot": {
+    "format": "󰄀",
+    "tooltip": true,
+    "tooltip-format": "Screenshot",
+    "on-click": "~/.config/scripts/screenshot"
+  },
+
+  /* ───────── SCREENCAST ───────── */
+  "custom/screencast": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Screencast",
+    "on-click": "~/.config/scripts/screen_cast"
+  },
+
+  /* ───────── POWER ───────── */
+  "custom/power": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Power Menu",
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  }
+}
