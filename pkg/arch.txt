@@ -65,3 +65,17 @@ ttf-cascadia-code
 ttf-jetbrains-mono-nerd
 noto-fonts-extra
 devtools
+xorg-xwayland
+xdg-desktop-portal-wlr
+xdg-desktop-portal-kde
+xdg-desktop-portal-gtk
+mako
+brightnessctl
+hyprpolkitagent
+cliphist
+fcitx5
+udisikie
+swaybg
+less
+more
+hyprcursor
