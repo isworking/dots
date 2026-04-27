@@ -38,7 +38,6 @@ rofi
 fuzzel
 wofi
 dmenu
-awww
 waybar
 wl-clipboard
 grim
@@ -79,3 +78,4 @@ swaybg
 less
 more
 hyprcursor
+gtklock
