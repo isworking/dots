@@ -3,5 +3,8 @@
 [user]
 	name = Rajdeep Malakar
 	email = rajdeepm.dev@gmail.com
+	signingkey = 683BAD66E3C54C47
 [commit]
 	gpgsign = true
+[tag]
+	gpgSign = true
