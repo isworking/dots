@@ -9,7 +9,7 @@ local act = wezterm.action
 
 config.color_scheme = "Catppuccin Frappe"
 config.cursor_thickness = 0.5
-config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Bold", italic = false })
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold", italic = false })
 config.enable_scroll_bar = true
 config.enable_kitty_keyboard = true
 config.detect_password_input = true
