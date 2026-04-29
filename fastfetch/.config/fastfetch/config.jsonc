@@ -182,11 +182,6 @@
             "keyColor": "blue"
         },
         {
-            "type": "font",
-            "key": "├   fnt",
-            "keyColor": "blue"
-        },
-        {
             "type": "terminal",
             "key": "└   term",
             "keyColor": "blue"
