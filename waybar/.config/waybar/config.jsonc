@@ -143,7 +143,7 @@
     "format-disconnected": "󰤭  OFFLINE",
     "tooltip-format": "{essid} ({signalStrength}%)",
     "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
-    "on-click-right": "alacritty -e nmtui"
+    "on-click-right": "kitty -e nmtui"
   },
 
   /* ───────── BLUETOOTH ───────── */
@@ -159,7 +159,7 @@
       "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
       "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
       "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
-      "on-click-right": "alacritty -e bluetui"
+      "on-click-right": "kitty -e bluetui"
   },
 
   /* ───────── BATTERY ───────── */
