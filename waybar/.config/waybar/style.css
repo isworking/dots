@@ -47,7 +47,6 @@ window#waybar > box {
 
 #workspaces button.focused {
   color: rgba(166, 227, 161, 0.9);
-  padding: 0 8px;
 }
 
 /* CENTER */
