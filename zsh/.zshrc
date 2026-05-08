@@ -105,38 +105,6 @@ export VISUAL="emacsclient -c"
 alias n="nvim"
 alias e="emacsclient -nc"
 
-# TEMP
-export PREFIX="$HOME/opt/cross"
-export TARGET=x86_64-elf
-export PATH="$PREFIX/bin:$PATH"
-
-function fuckoff { 
-  # Sync filesystems
-  echo s | run0 tee /proc/sysrq-trigger > /dev/null
-  sleep 1  # Wait a moment for the sync to complete
-
-  # Unmount filesystems
-  echo u | run0 tee /proc/sysrq-trigger > /dev/null
-  sleep 1  # Wait a moment for the unmount to complete
-
-  # Power off the system
-  echo o | run0 tee /proc/sysrq-trigger > /dev/null
-}
-
-
-function getback { 
-  # Sync filesystems
-  echo s | run0 tee /proc/sysrq-trigger > /dev/null
-  sleep 1  # Wait a moment for the sync to complete
-
-  # Unmount filesystems
-  echo u | run0 tee /proc/sysrq-trigger > /dev/null
-  sleep 1  # Wait a moment for the unmount to complete
-
-  # Reboot the system
-  echo b | run0 tee /proc/sysrq-trigger > /dev/null
-}
-
 function multi() {
   n="$1"
   cmd="$2"
@@ -145,7 +113,7 @@ function multi() {
 
   for i in $(seq 1 $n); do
     echo -e "\e[1;32mRunning $i time\e[0m"  # Green text, bold
-    eval "$cmd $args" > /dev/null 2>&1               # Suppress both stdout and stderr
+    eval "$cmd $args" > /dev/null 2>&1      # Suppress both stdout and stderr
   done
 }
 
@@ -168,12 +136,6 @@ export WASMER_DIR="/home/rajdeep/.wasmer"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/rajdeep/.lmstudio/bin"
-# End of LM Studio CLI section
-
-export PATH=$PATH:/home/rajdeep/.spicetify
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
