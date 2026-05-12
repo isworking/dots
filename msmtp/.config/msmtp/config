@@ -1,0 +1,17 @@
+defaults
+auth           on
+tls            on
+tls_starttls   off
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.local/state/msmtp.log
+auto_from      off
+domain         rajdeepm.xyz
+
+account        ses
+host           email-smtp.ap-south-1.amazonaws.com
+port           465
+from           raj@rajdeepm.xyz
+user           AKIA4XVYLBHJJHVFPWWA
+passwordeval   "pass mail/ses-smtp"
+
+account default : ses

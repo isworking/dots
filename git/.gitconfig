@@ -8,3 +8,8 @@
 	gpgsign = true
 [tag]
 	gpgSign = true
+[sendemail]
+	smtpServer = /usr/bin/sendmail
+	from = Rajdeep Malakar <raj@rajdeepm.xyz>
+	annotate = yes
+	confirm = auto
