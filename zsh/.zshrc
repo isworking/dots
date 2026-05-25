@@ -6,7 +6,6 @@ fi
 export PF_INFO="ascii title os host kernel shell uptime memory"
 fastfetch
 
-kotofetch
 # bun completions
 [ -s "/home/rajdeep/.bun/_bun" ] && source "/home/rajdeep/.bun/_bun"
 
@@ -24,7 +23,7 @@ zsh_plugins=$HOME/.zsh_plugins
 [[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
 
 # Set the fpath, for loading the functions
-fpath=($HOME/.antidote/functions $fpath)
+fpath=($(brew --prefix)/opt/antidote/share/antidote/functions $fpath)
 
 # autoload, ofc
 autoload -Uz antidote
@@ -47,14 +46,12 @@ source ${zsh_plugins}.zsh
 
 # Set alises, and other stuff
 alias cat="bat"
-alias ls="exa"
+alias ls="eza"
 alias kubectl="minikube kubectl --"
 alias csm="start-cosmic"
 alias hyp="Hyprland"
 alias st="/home/rajdeep/.sh/startup-services.sh"
 alias icat="kitten icat"
-
-export XDG_CURRENT_DESKTOP="sway"
 
 export PAGER='most'
 export GROFF_NO_SGR=1
@@ -63,10 +60,82 @@ export MICRO_TRUECOLOR=1
 
 export ANDROID_HOME="${HOME}/Android/Sdk"
 
-function grubdate {
-  sudo grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-  sudo grub-mkconfig -o /boot/grub/grub.conf
+export GPG_TTY=$(tty)
+
+install() {
+  if [[ "$1" == "--cask" ]]; then
+    # ---------- HANDLE CASKS ----------
+    shift
+    echo "📦 Installing Cask: $1"
+    brew install --cask "$1"
+    
+    # Find where Homebrew put the .app
+    APP_PATH=$(brew list --cask "$1" | grep -Eo '/Applications/[^/]+\.app' | head -1)
+    
+    if [[ -n "$APP_PATH" ]]; then
+      echo "🔓 Removing quarantine from: $APP_PATH"
+      sudo xattr -rd com.apple.quarantine "$APP_PATH"
+      echo "✅ Ready to launch!"
+    else
+      echo "⚠️ Could not auto-detect the .app path to un-quarantine."
+    fi
+
+  elif [[ "$1" == "--dmg" ]]; then
+    # ---------- HANDLE RAW DMGs ----------
+    shift
+    DMG_PATH="$1"
+    
+    if [[ ! -f "$DMG_PATH" ]]; then
+      echo "❌ Error: Could not find DMG at $DMG_PATH"
+      return 1
+    fi
+    
+    echo "💿 Mounting DMG: $DMG_PATH"
+    # Silently mount the DMG and capture the mount point
+    MOUNT_POINT=$(hdiutil attach -nobrowse -noverify -noautoopen "$DMG_PATH" | grep -Eo '/Volumes/.*')
+    
+    if [[ -z "$MOUNT_POINT" ]]; then
+      echo "❌ Error: Failed to mount DMG."
+      return 1
+    fi
+    
+    # Find the .app inside the mount point
+    APP_SOURCE=$(find "$MOUNT_POINT" -maxdepth 1 -name "*.app" | head -n 1)
+    
+    if [[ -n "$APP_SOURCE" ]]; then
+      APP_NAME=$(basename "$APP_SOURCE")
+      DEST_PATH="/Applications/$APP_NAME"
+      
+      echo "🚚 Copying $APP_NAME to /Applications..."
+      # Use ditto or cp to move the app (ditto preserves Mac metadata perfectly)
+      sudo ditto "$APP_SOURCE" "$DEST_PATH"
+      
+      echo "🔓 Removing quarantine from: $DEST_PATH"
+      sudo xattr -rd com.apple.quarantine "$DEST_PATH"
+      
+      echo "✅ Ready to launch!"
+    else
+      echo "⚠️ No .app found inside the DMG."
+    fi
+    
+    # Clean up and unmount
+    echo "🧹 Unmounting DMG..."
+    hdiutil detach "$MOUNT_POINT" -quiet
+
+  else
+    # ---------- HANDLE STANDARD FORMULAS ----------
+    # If no flags are passed, just act like a normal brew install
+    echo "🍺 Installing standard Homebrew formula: $@"
+    brew install "$@"
+  fi
 }
+
+please() {
+  caffeinate -is "$@"
+  say "Master, the execution has finished."
+}
+
+alias yeet_xcode="rm -rf ~/Library/Developer/Xcode/DerivedData/* && echo '🗑️ Xcode DerivedData nuked! Rebuild your project.'"
 
 function kg {
   pgrep $1 | xargs -r kill
@@ -92,6 +161,8 @@ function install_icons {
 
 # Set PATHs
 export GOPATH="$HOME/go"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$HOME/.local/share/gem/ruby/3.2.0/bin:$HOME/.cargo/bin:$HOME:/.bun/bin:$HOME/.local/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.ghcup/bin:$PATH"

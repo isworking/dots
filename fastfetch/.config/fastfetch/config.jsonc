@@ -112,13 +112,6 @@
     },
     "constants": []
   },
-  "general": {
-    "thread": true,
-    "processingTimeout": 5000,
-    "detectVersion": true,
-    "playerName": "",
-    "dsForceDrm": false
-  },
   "modules": [
         {
             "type": "title",
