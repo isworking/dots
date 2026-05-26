@@ -3,11 +3,12 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Rajdeep Malakar"
-      user-mail-address "rajdeepm.dev@gmail.com")
+      user-mail-address "raj@isworking.dev")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
