@@ -1,8 +1,10 @@
 export TERM="xterm-256color"
 
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -c -a ''"
-export SUDO_EDITOR="$EDITOR"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export SUDO_EDITOR="nvim"
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 
 export PAGER="most"
 export GROFF_NO_SGR=1

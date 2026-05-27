@@ -1,16 +1,39 @@
+# =============================================================================
 # ~/.zprofile
+# Login shell initialization
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Homebrew
+# -----------------------------------------------------------------------------
 
 if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# -----------------------------------------------------------------------------
+# Environment
+# -----------------------------------------------------------------------------
+
 export ZDOTDIR="$HOME"
+export ZSH_CONFIG="$HOME/.zsh"
 
-source "$HOME/.zsh/paths.zsh"
-source "$HOME/.zsh/env.zsh"
+# -----------------------------------------------------------------------------
+# User environment
+# -----------------------------------------------------------------------------
 
-export PF_INFO="ascii title os host kernel shell uptime memory"
+source "$ZSH_CONFIG/paths.zsh"
+source "$ZSH_CONFIG/env.zsh"
 
-if [[ -o login ]] && [[ -t 1 ]]; then
-    command -v fastfetch >/dev/null && fastfetch
+# -----------------------------------------------------------------------------
+# Tmux auto-start
+# -----------------------------------------------------------------------------
+
+if command -v tmux >/dev/null 2>&1 \
+    && [[ -o login ]] \
+    && [[ -t 1 ]] \
+    && [[ -z "$TMUX" ]] \
+    && [[ "$TERM" != "dumb" ]]; then
+
+    tmux attach -t main || exec tmux new -s main
 fi

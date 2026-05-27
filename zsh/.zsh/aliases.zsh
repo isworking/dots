@@ -8,11 +8,9 @@ alias et='emacsclient -nw -a ""'
 
 alias kubectl="minikube kubectl --"
 
-alias csm="start-cosmic"
-alias hyp="Hyprland"
-
 alias st="$HOME/.sh/startup-services.sh"
 
 alias icat="kitten icat"
 
+alias sudoedit="sudo -e"
 alias yeet_xcode="rm -rf ~/Library/Developer/Xcode/DerivedData/* && echo '🗑️ Xcode DerivedData nuked!'"

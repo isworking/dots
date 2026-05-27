@@ -1,14 +1,7 @@
 # =============================================================================
 # ~/.zshrc
+# Interactive shell configuration
 # =============================================================================
-
-# -----------------------------------------------------------------------------
-# Login shell compatibility
-# -----------------------------------------------------------------------------
-
-if [[ ! -o login ]]; then
-    emulate sh -c '. /etc/profile'
-fi
 
 # -----------------------------------------------------------------------------
 # Powerlevel10k instant prompt
@@ -37,7 +30,7 @@ setopt extendedglob
 export ZSH_CONFIG="$HOME/.zsh"
 
 # -----------------------------------------------------------------------------
-# Load core modules
+# Core modules
 # -----------------------------------------------------------------------------
 
 source "$ZSH_CONFIG/plugins.zsh"
@@ -49,11 +42,11 @@ source "$ZSH_CONFIG/tools.zsh"
 # Platform-specific config
 # -----------------------------------------------------------------------------
 
-case "$(uname -s)" in
-    Linux)
+case "$OSTYPE" in
+    linux*)
         source "$ZSH_CONFIG/platform/linux.zsh"
         ;;
-    Darwin)
+    darwin*)
         source "$ZSH_CONFIG/platform/macos.zsh"
         ;;
 esac
@@ -63,3 +56,13 @@ esac
 # -----------------------------------------------------------------------------
 
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+
+# -----------------------------------------------------------------------------
+# Fastfetch
+# -----------------------------------------------------------------------------
+
+export PF_INFO="ascii title os host kernel shell uptime memory"
+
+if [[ -o interactive ]] && [[ -t 1 ]]; then
+    command -v fastfetch >/dev/null && fastfetch
+fi
