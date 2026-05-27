@@ -5,6 +5,12 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(setq ns-pop-up-frames nil)
+(setq focus-follows-mouse t)
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (select-frame-set-input-focus (selected-frame))))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Rajdeep Malakar"
